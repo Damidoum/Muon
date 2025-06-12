@@ -111,7 +111,7 @@ class SingleDeviceMuon(torch.optim.Optimizer):
         super().__init__(params, defaults)
 
     @torch.no_grad()
-    def step(self):
+    def step(self, closure=None):
         for group in self.param_groups:
             for p in group["params"]:
                 state = self.state[p]
@@ -186,7 +186,7 @@ class MuonWithAuxAdam(torch.optim.Optimizer):
         super().__init__(param_groups, dict())
 
     @torch.no_grad()
-    def step(self):
+    def step(self, closure=None):
         for group in self.param_groups:
             if group["use_muon"]:
                 params = group["params"]
@@ -256,7 +256,7 @@ class SingleDeviceMuonWithAuxAdam(torch.optim.Optimizer):
         super().__init__(param_groups, dict())
 
     @torch.no_grad()
-    def step(self):
+    def step(self, closure=None):
         for group in self.param_groups:
             if group["use_muon"]:
                 for p in group["params"]:
